@@ -4,6 +4,7 @@ resources:
   source:
     uri: git@github.com:karafelix/concourse-demo.git
     branch: master
+    private_key: {{private-repo-key}}
 
 jobs:
 - name: hello-world
