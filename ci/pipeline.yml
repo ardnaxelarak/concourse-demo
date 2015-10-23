@@ -23,7 +23,7 @@ jobs:
   - task: say-hello
     file: concourse-demo/ci/tasks/hello.yml
   - put: text-file
-    params: {file: out/text-file*}
+    params: {from: out/text-file}
 
 - name: goodbye
   plan:
@@ -36,4 +36,4 @@ jobs:
     file: concourse-demo/ci/tasks/goodbye.yml
     config:
       params:
-        NAME: {{user}}
+        NAME: Abacus
