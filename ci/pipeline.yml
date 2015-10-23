@@ -13,3 +13,15 @@ jobs:
     trigger: true
   - task: say-hello
     file: concourse-demo/ci/tasks/hello.yml
+
+jobs:
+- name: goodbye
+  plan:
+  - get: concourse-demo
+    trigger: true
+    passed: [hello-world]
+  - task: goodbye
+    file: concourse-demo/ci/tasks/goodbye.yml
+    config:
+      params:
+        NAME: {{user}}
