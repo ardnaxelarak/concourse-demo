@@ -13,8 +13,6 @@ jobs:
     trigger: true
   - task: say-hello
     file: concourse-demo/ci/tasks/hello.yml
-
-jobs:
 - name: goodbye
   plan:
   - get: concourse-demo
