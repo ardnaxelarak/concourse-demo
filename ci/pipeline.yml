@@ -2,9 +2,18 @@ resources:
 - name: concourse-demo
   type: git
   source:
-    uri: git@github.com:karafelix/concourse-demo.git
+    uri: http://github.com/karafelix/concourse-demo.git
     branch: master
-    private_key: {{private-repo-key}}
+
+- name: text-file
+  type: s3
+  source:
+    bucket: stemcells
+    regexp: text-file
+    access_key_id: {{SWIFT_USERNAME}}
+    secret_access_key: {{SL_API_KEY}}
+    region_name: {{SWIFT_CLUSTER}}
+    endpoint: {{SL_ENDPOINT}}
 
 jobs:
 - name: hello-world
@@ -13,9 +22,14 @@ jobs:
     trigger: true
   - task: say-hello
     file: concourse-demo/ci/tasks/hello.yml
+  - put: text-file
+    params: {file: out/text-file*}
+
 - name: goodbye
   plan:
   - get: concourse-demo
+    trigger: true
+  - get: text-file
     trigger: true
     passed: [hello-world]
   - task: goodbye
