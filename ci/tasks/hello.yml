@@ -1,0 +1,9 @@
+---
+platform: linux
+image: docker:///ubuntu
+
+inputs:
+  - name: concourse-demo
+
+run:
+  path: concourse-demo/ci/scripts/hello.sh

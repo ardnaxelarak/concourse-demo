@@ -1,0 +1,14 @@
+resources:
+- name: concourse-demo
+  type: git
+  source:
+    uri: git@github.com:karafelix/concourse-demo.git
+    branch: master
+
+jobs:
+- name: hello-world
+  plan:
+  - get: concourse-demo
+    trigger: true
+  - task: say-hello
+    file: concourse-demo/ci/tasks/hello.yml
