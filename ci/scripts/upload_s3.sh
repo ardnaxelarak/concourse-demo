@@ -2,4 +2,4 @@
 
 mkdir out
 
-echo "fish" > out/stemcell-version.blah
+echo "fish" > out/stemcell-version
