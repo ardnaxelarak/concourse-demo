@@ -136,7 +136,7 @@ and will allow you to connect to the machine in the future with `fly -t <taget-n
 
 For purposes of setting up this demo, I will assume the target has been saved as `demo`.
 
-To add a pipeline to your target, use the `configure` command:
+To add a pipeline to your target, use the `set-pipeline` command:
 ```
 fly -t demo set-pipeline <arguments>
 ```
