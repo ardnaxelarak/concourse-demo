@@ -126,11 +126,11 @@ to get the virtual machine loaded with concourse.
 #### Creating your pipeline
 If you do not already have the Fly CLI, go to your virtual machine in a web browser (connecting to port 8080), and download it.
 
-To make it easier to connect to your target, run `fly save-target`.
+To connect to your target, run `fly login`.
 ```
-fly save-target --api https://server.ip:8080 --username <username> --password <password> <target-name>
+fly -t <target-name> login  -c https://server.ip:8080
 ```
-The username and password specified should be the same as in the concourse manifest.
+This will prmopt you for a username and password, which were specified in the concourse manifest.
 This will save the information for connecting to the target to `.flyrc` in your home directory,
 and will allow you to connect to the machine in the future with `fly -t <taget-name> <whatever-command>`
 
@@ -138,16 +138,16 @@ For purposes of setting up this demo, I will assume the target has been saved as
 
 To add a pipeline to your target, use the `configure` command:
 ```
-fly -t demo configure <arguments>
+fly -t demo set-pipeline <arguments>
 ```
 For this pipeline, from the `ci` directory, you can run
 ```
-fly -t demo configure -c demo1.yml --vars-from credentials.yml demo_1
+fly -t demo set-pipeline -c demo1.yml -v credentials.yml -p demo_1
 ```
 In the above example, `demo1.yml` is the configuration for the pipeline, `credentials.yml` contains values to substitute into
 the pipeline manifest, and `demo_1` is the name of the pipeline.
 This will upload the pipeline to your VM, but it will initially be paused. It can be started by clicking the play button on
-the UI, or by passing the `--paused=false` argument to `fly configure`.
+the UI, or by calling `fly unpause-pipeline`.
 
 At this point your (very simple) pipeline is up and set to go! The jobs should start automatically, but you can also run them
 manually by clicking the + icon on the page for the job.
